@@ -3,7 +3,7 @@ import { Button, Drawer, Icon } from 'rsuite';
 import { useMediaQuery, useModalState } from '../../misc/custom-hooks';
 import Dashboard from '.';
 
-const DashBoardToggle = () => {
+const DashboardToggle = () => {
   const { isOpen, open, close } = useModalState();
   const isMobile = useMediaQuery('(max-width:992px)');
   return (
@@ -19,4 +19,4 @@ const DashBoardToggle = () => {
   );
 };
 
-export default DashBoardToggle;
+export default DashboardToggle;
