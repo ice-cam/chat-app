@@ -14,7 +14,7 @@ import { useModalState } from '../../misc/custom-hooks';
 import firebase from 'firebase/app';
 import { database } from '../../misc/firebase';
 
-const { StringType } = Schema.Types();
+const { StringType } = Schema.Types;
 const model = Schema.Model({
   name: StringType().isRequired('Chat name is required'),
   description: StringType().isRequired('Description is required'),
