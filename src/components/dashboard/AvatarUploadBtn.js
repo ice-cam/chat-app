@@ -56,9 +56,9 @@ const AvatarUploadBtn = () => {
         .ref(`/profiles/${profile.uid}`)
         .child('avatar');
       const uploadAvatarResult = await avatarFileRef.put(blob, {
-        cacheControl: `public , max-age=${3600 * 24 * 3}`,
+        cacheControl: `public , max-age==${3600 * 24 * 3}`,
       });
-      const downloadUrl = await uploadAvatarResult.ref.getDownloadUrl();
+      const downloadUrl = await uploadAvatarResult.ref.getDownloadURL();
       const userAvatarRef = database
         .ref(`/profiles/${profile.uid}`)
         .child('avatar');
@@ -72,7 +72,7 @@ const AvatarUploadBtn = () => {
     }
   };
   return (
-    <div className="mt-3 text-centre">
+    <div className="mt-3 text-center">
       <ProfileAvatar
         src={profile.avatar}
         name={profile.name}
