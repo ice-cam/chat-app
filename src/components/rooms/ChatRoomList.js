@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Loader, Nav } from 'rsuite';
 import NavItem from 'rsuite/lib/Nav/NavItem';
 import RoomItem from './RoomItem';
