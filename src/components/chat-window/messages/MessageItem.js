@@ -1,7 +1,8 @@
 import React from 'react';
 import ProfileAvatar from '../../ProfileAvatar';
-import { auth } from '../../../misc/firebase';
+//import { auth } from '../../../misc/firebase';
 import TimeAgo from 'timeago-react';
+import ProfileInfoBtnModal from './ProfileInfoBtnModal';
 
 const MessageItem = ({ message }) => {
   const { author, createdAt, text } = message;
@@ -15,6 +16,11 @@ const MessageItem = ({ message }) => {
           size="xs"
         />
         <span className="ml-2">{author.name}</span>
+        <ProfileInfoBtnModal
+          profile={author}
+          appearence="link"
+          className="p-0 ml-1 text-black"
+        />
         <TimeAgo
           dateTime={createdAt}
           className="font-normal text-black-45 ml-2"
