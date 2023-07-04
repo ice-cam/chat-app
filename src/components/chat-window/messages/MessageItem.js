@@ -9,9 +9,21 @@ import { auth } from '../../../misc/firebase';
 import { Button } from 'rsuite';
 import { useHover, useMediaQuery } from '../../../misc/custom-hooks';
 import IconBtnControl from './IconBtnControl';
+import ImgBtnModal from './ImgBtnModal';
 
-const MessageItem = ({ message, handleAdmin, handleLike }) => {
-  const { author, createdAt, text, likes, likeCount } = message;
+const renderFileMessage = file => {
+  if (file.contentType.includes('image')) {
+    return (
+      <div className="height-220">
+        <ImgBtnModal src={file.url} fileNme={file.name} />
+      </div>
+    );
+  }
+  return <a href={file.url}>Download {file.name}</a>;
+};
+
+const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
+  const { author, createdAt, text, file, likes, likeCount } = message;
 
   const [selfRef, isHovered] = useHover();
   const isMobile = useMediaQuery('(max-width : 992px)');
@@ -57,7 +69,6 @@ const MessageItem = ({ message, handleAdmin, handleLike }) => {
           className="font-normal text-black-45 ml-2"
         />
         <IconBtnControl
-          // eslint-disable-next-line no-constant-condition
           {...(isLiked ? { color: 'red' } : {})}
           isVisble={canShowIcons}
           iconName="heart"
@@ -65,10 +76,21 @@ const MessageItem = ({ message, handleAdmin, handleLike }) => {
           onClick={() => handleLike(message.id)}
           badgeContent={likeCount}
         />
+
+        {isAuthor && (
+          <IconBtnControl
+            isVisble={canShowIcons}
+            iconName="heart"
+            tooltip="Like this message"
+            onClick={() => handleDelete(message.id)}
+            badgeContent={likeCount}
+          />
+        )}
       </div>
 
       <div>
-        <span className="word-break-all ">{text}</span>
+        {text && <span className="word-breal-all ">{text}</span>}
+        {file && renderFileMessage(file)}
       </div>
     </li>
   );
