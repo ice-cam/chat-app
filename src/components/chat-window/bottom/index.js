@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import { useProfile } from '../../../context/profile.context';
 import { useParams } from 'react-router-dom';
 import { database } from '../../../misc/firebase';
+import AttachmentBtnModal from './AttachmentBtnModal';
 
 function assembleMessage(profile, chatId) {
   return {
@@ -15,6 +16,7 @@ function assembleMessage(profile, chatId) {
       ...(profile.avatar ? { avatar: profile.avatar } : {}),
     },
     createdAt: firebase.database.ServerValue.TIMESTAMP,
+    likeCount: 0,
   };
 }
 
@@ -64,6 +66,7 @@ const Bottom = () => {
   return (
     <div>
       <InputGroup>
+        <AttachmentBtnModal />
         <Input
           placeholder="Write a new message here..."
           value={input}
