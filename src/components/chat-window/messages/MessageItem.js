@@ -60,21 +60,23 @@ const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
           className="ml-1"
           size="xs"
         />
-        <span className="ml-2">{author.name}</span>
-        {canGrantAdmin && (
-          <Button block onClick={() => handleAdmin(author.uid)} color="blue">
-            {isMsgAuthorAdmin
-              ? 'Remove admin permission'
-              : 'Give admin in this room'}
-          </Button>
-        )}
+
         <ProfileInfoBtnModal
           profile={author}
           appearence="link"
           className="p-0 ml-1 text-black"
-        />
+        >
+          {canGrantAdmin && (
+            <Button block onClick={() => handleAdmin(author.uid)} color="blue">
+              {isMsgAuthorAdmin
+                ? 'Remove admin permission'
+                : 'Give admin in this room'}
+            </Button>
+          )}
+        </ProfileInfoBtnModal>
+
         <TimeAgo
-          dateTime={createdAt}
+          datetime={createdAt}
           className="font-normal text-black-45 ml-2"
         />
         <IconBtnControl
@@ -89,10 +91,9 @@ const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
         {isAuthor && (
           <IconBtnControl
             isVisble={canShowIcons}
-            iconName="heart"
-            tooltip="Like this message"
+            iconName="close"
+            tooltip="Delete  this message"
             onClick={() => handleDelete(message.id, file)}
-            badgeContent={likeCount}
           />
         )}
       </div>

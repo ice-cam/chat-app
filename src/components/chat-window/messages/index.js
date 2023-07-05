@@ -4,6 +4,8 @@ import { useParams } from 'react-router';
 import { auth, database, storage } from '../../../misc/firebase';
 import { groupBy, transformToArrWithId } from '../../../misc/helpers';
 import MessageItem from './MessageItem';
+//import {ref as dbRef , runTransaction, off ,onValue , query , orderByChild, limitToLast, equalTo, update} from 'firebase/database';
+//import {deleteObject,  ref as storageRef } from 'firebase/storage';
 
 const PAGE_SIZE = 15;
 const messagesRef = database.ref('/messages');
@@ -21,8 +23,8 @@ const Messages = () => {
   const [limit, setLimit] = useState(PAGE_SIZE);
   const selfRef = useRef();
 
-  const isChatEmpty = messages && messages.lenght === 0;
-  const canShowMessages = messages && messages.lenght > 0;
+  const isChatEmpty = messages && messages.length=== 0;
+  const canShowMessages = messages && messages.length  > 0;
 
   const loadMessages = useCallback(
     limitToLast => {
@@ -171,20 +173,18 @@ const Messages = () => {
         </li>
       );
 
-      const msgs = groups[date].map(msg => {
-        messages.map(msg => (
-          <MessageItem
-            key={msg.id}
-            message={msg}
-            handleAdmin={handleAdmin}
-            handleLike={handleLike}
-            handleDelete={handleDelete}
-          />
-        ));
-        items.push(...msgs);
-      });
-      return items;
+      const msgs = groups[date].map(msg => (
+        <MessageItem
+          key={msg.id}
+          message={msg}
+          handleAdmin={handleAdmin}
+          handleLike={handleLike}
+          handleDelete={handleDelete}
+        />
+      ));
+      items.push(...msgs);
     });
+    return items;
   };
   return (
     <ul ref={selfRef} className="msg-list custom-scroll">
