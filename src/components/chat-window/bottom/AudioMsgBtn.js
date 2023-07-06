@@ -40,7 +40,11 @@ const AudioMsgBtn = ({ afterUpload }) => {
   );
   return (
     <div>
-      <InputGroup.Button onClick={onClick} disabled={isUploading}>
+      <InputGroup.Button
+        onClick={onClick}
+        disabled={isUploading}
+        className={isRecording ? 'animate-blink' : ''}
+      >
         <Icon icon="microphone" />
         <ReactMic
           record={isRecording}
